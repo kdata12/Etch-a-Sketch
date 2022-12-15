@@ -15,7 +15,7 @@ function clearBoard() {
 
 function resize(){
     //ask for a prompt to enter # of squares
-    let userIn = prompt("How many squares do you want?")
+    let userIn = prompt("How many squares do you want? 1 - 99")
     //clear board;
     clearBoard()
     //make board empty
@@ -32,15 +32,16 @@ function emptyBoard(){
     //remove all test classes
     test.forEach(test => test.remove());
 
-    //rebind event listener
-    const allBoxes = document.querySelectorAll('.box')
-    //add event listener to all class boxes
-    allBoxes.forEach(box => box.addEventListener('mouseover', switchColor))
 }
 
 
-
 function changeBoard(userIn=16) {
+    if (userIn > 99) {
+        userIn = 99;
+    } else if (userIn < 0) {
+        userIn = 1;
+    }
+
     const container = document.querySelector(".container");
     
     container.setAttribute('class', `container ${userIn}`);
@@ -69,8 +70,12 @@ function changeBoard(userIn=16) {
                                         margin: 0;`;
                 row1.appendChild(divSquare2);
         }
-    }   
-
+    }
+    
+    //rebind event listener
+    const allBoxes = document.querySelectorAll('.box')
+    //add event listener to all class boxes
+    allBoxes.forEach(box => box.addEventListener('mouseover', switchColor))
 }
 
 
